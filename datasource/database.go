@@ -1,7 +1,8 @@
-package main
+package datasource
 
 import (
 	"fmt"
+	"godocker/models"
 	"log"
 	"os"
 	"strings"
@@ -42,7 +43,7 @@ func initDb() *gorm.DB {
 	checkErr(err, "sql.Open failed")
 	Instance.Set("gorm:table_options", "ENGINE=InnoDB").
 		AutoMigrate(
-			&Agent{},
+			&models.Agent{},
 		)
 	checkErr(err, "Create tables failed")
 	db, _ := Instance.DB()
