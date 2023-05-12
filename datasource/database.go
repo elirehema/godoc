@@ -30,7 +30,7 @@ func initDb() *gorm.DB {
 	}
 
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", username, password, host, port, databaseName)
-
+	print(dsn)
 	Instance, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		//DisableForeignKeyConstraintWhenMigrating: true,
 		NamingStrategy: schema.NamingStrategy{
