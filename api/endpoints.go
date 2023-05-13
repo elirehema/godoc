@@ -17,8 +17,8 @@ func CreateUrlMappings() {
 	//v1 of the API
 	v1 := router.Group("/api/v1")
 	{
+		v1.POST("/agents", controllers.CreateAgent)
 		v1.GET("/agents", controllers.GetAgents)
-		v1.GET("/agents/:id", controllers.GetAgentById)
 
 	}
 

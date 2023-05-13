@@ -1,6 +1,9 @@
 package models
 
 import (
+	"fmt"
+	"time"
+
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
@@ -8,7 +11,7 @@ import (
 type Agent struct {
 	Id         string `gorm:"column:id;not null unique;<-:create; primarykey" json:"id"`
 	Phone      string `db:"phone" gorm:"unique" json:"phone"`
-	Email      string `db:"email" gorm:"unique" json:"email"`
+	Email      string `db:"email" json:"email"`
 	FirstName  string `db:"firstnname" json:"firstname"`
 	LastName   string `db:"lastname" json:"lastname"`
 	AgentCode  string `gorm:"not null;not null;unique;<-:create" json:"agentCode"`
@@ -19,5 +22,7 @@ type Agent struct {
 
 func (d *Agent) BeforeCreate(tx *gorm.DB) (err error) {
 	d.Id = uuid.New().String()
+	d.AgentCode = uuid.New().String()
+	d.Phone = fmt.Sprintf("%v", time.Now().UnixNano())
 	return
 }
